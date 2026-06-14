@@ -1,0 +1,49 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Local database (created automatically on first run)
+*.db
+
+# Environment variables
+.env
+.env.*
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.cursor/
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Word temp files
+~$*.docx
+~$*.doc
+
+# Practice reports and diaries (not part of the application)
+*.docx
+*.txt
+!requirements.txt
+
+# Report generation utilities (local tooling)
+generate_report_docx.py
+render_erd_and_insert_docx.py
+
+# Keep screenshots folder but ignore large temp exports if needed
+# docs/screenshots/*.png  # uncomment after adding screenshots to avoid duplicates
