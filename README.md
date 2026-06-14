@@ -10,10 +10,9 @@
 
 ## Скриншоты
 
-> Добавьте скриншоты в `docs/screenshots/` и раскомментируйте строки ниже.
+![Главная панель AIS](docs/screenshots/01-main.png)
 
 <!--
-![Главная панель](docs/screenshots/01-main.png)
 ![Карточка актива](docs/screenshots/02-equipment-card.png)
 ![Инциденты](docs/screenshots/03-incidents.png)
 ![Контроль гарантии](docs/screenshots/04-warranty.png)
