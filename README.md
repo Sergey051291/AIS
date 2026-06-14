@@ -1,93 +1,93 @@
-# AIS — IT Asset Management System
+# AIS — система учета и мониторинга ИТ-активов
 
-**Automated information system for accounting and monitoring of IT assets and components.**
+**Автоматизированная информационная система учета и мониторинга ИТ-активов и комплектующих.**
 
-A web-based prototype developed during production practice for an IT support and logistics department. The system centralizes equipment records, tracks incidents, monitors warranty periods, manages spare parts inventory, and generates procurement requests and reports.
+Веб-прототип, разработанный в рамках производственной практики для отдела сопровождения вычислительной техники и службы логистики ИТ-оборудования. Система централизует учет техники, ведет историю инцидентов, контролирует гарантийные сроки, управляет складскими остатками и формирует заявки на закупку и отчетность.
 
-> Context: built for a corporate IT support workflow (equipment lifecycle, spare parts warehouse, critical workstations such as check-in desks).
+> Контекст: корпоративный сценарий — жизненный цикл оборудования, склад комплектующих, критически важные рабочие места (например, стойки регистрации).
 
 ---
 
-## Screenshots
+## Скриншоты
 
-> Add screenshots to `docs/screenshots/` and uncomment the lines below.
+> Добавьте скриншоты в `docs/screenshots/` и раскомментируйте строки ниже.
 
 <!--
-![Main dashboard](docs/screenshots/01-main.png)
-![Equipment card](docs/screenshots/02-equipment-card.png)
-![Incidents](docs/screenshots/03-incidents.png)
-![Warranty monitoring](docs/screenshots/04-warranty.png)
-![Inventory reports](docs/screenshots/05-reports.png)
+![Главная панель](docs/screenshots/01-main.png)
+![Карточка актива](docs/screenshots/02-equipment-card.png)
+![Инциденты](docs/screenshots/03-incidents.png)
+![Контроль гарантии](docs/screenshots/04-warranty.png)
+![Отчетность](docs/screenshots/05-reports.png)
 -->
 
 ---
 
-## Features
+## Функциональность
 
-| Module | Description |
-|--------|-------------|
-| **Equipment registry** | Register IT assets: type, model, serial number, location, status, responsible employee |
-| **Asset card** | View full device profile and installed components (RAM, SSD, GPU, etc.) |
-| **Incidents** | Log failures and maintain repair history |
-| **Warranty control** | Automatic alerts for expiring manufacturer support |
-| **Warehouse & procurement** | Track spare parts stock and auto-generate purchase requests on low inventory |
-| **Reporting** | Export inventory lists and disposal acts to CSV |
-
----
-
-## Tech Stack
-
-| Layer | Technologies |
-|-------|-------------|
-| **Backend / Logic** | Python 3.10+ |
-| **UI** | Streamlit |
-| **Database** | SQLite (relational model, foreign keys) |
-| **Data processing** | Pandas |
+| Модуль | Описание |
+|--------|----------|
+| **Учет оборудования** | Регистрация ИТ-активов: тип, модель, серийный номер, локация, статус, ответственный |
+| **Карточка актива** | Полная информация об устройстве и установленных комплектующих (ОЗУ, SSD, видеокарта и т.д.) |
+| **Инциденты** | Регистрация неисправностей и ведение истории ремонтов |
+| **Контроль гарантии** | Автоматическое выявление оборудования с истекающим сроком поддержки |
+| **Склад и закупки** | Учет остатков комплектующих и автоматическое формирование заявок при дефиците |
+| **Отчетность** | Инвентаризационная ведомость и акт списания с выгрузкой в CSV |
 
 ---
 
-## Architecture
+## Стек технологий
+
+| Слой | Технологии |
+|------|------------|
+| **Backend / логика** | Python 3.10+ |
+| **Интерфейс** | Streamlit |
+| **База данных** | SQLite (реляционная модель, внешние ключи) |
+| **Обработка данных** | Pandas |
+
+---
+
+## Архитектура
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    Streamlit UI (app.py)                 │
-│  Tabs: Asset Card │ Registry │ Incidents │ Warranty │   │
-│        Warehouse │ Reports                                │
+│                 Streamlit UI (app.py)                    │
+│  Вкладки: Карточка │ Учет │ Инциденты │ Гарантия │     │
+│           Склад │ Отчетность                             │
 └────────────────────────┬────────────────────────────────┘
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────┐
-│              Business logic + SQL queries                │
+│              Бизнес-логика + SQL-запросы                   │
 └────────────────────────┬────────────────────────────────┘
                          │
                          ▼
 ┌─────────────────────────────────────────────────────────┐
-│           SQLite DB (db.py → ais_assets.db)              │
+│           SQLite БД (db.py → ais_assets.db)                │
 │  employees │ equipment │ incidents │ components │       │
 │  equipment_components │ purchase_requests                │
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Database entities:**
-- `employees` — staff and responsibility zones
-- `equipment` — IT asset records
-- `incidents` — failure and repair log
-- `components` — spare parts catalog and stock levels
-- `equipment_components` — device composition (many-to-many)
-- `purchase_requests` — procurement requests
+**Сущности базы данных:**
+- `employees` — сотрудники и зоны ответственности
+- `equipment` — учетные карточки ИТ-активов
+- `incidents` — журнал неисправностей и ремонтов
+- `components` — справочник комплектующих и складские остатки
+- `equipment_components` — состав устройства (связь многие-ко-многим)
+- `purchase_requests` — заявки на закупку
 
-See [ERD_AIS_IT_Assets.md](ERD_AIS_IT_Assets.md) and [ERD_AIS_IT_Assets.png](ERD_AIS_IT_Assets.png) for the entity-relationship diagram.
+ER-диаграмма: [ERD_AIS_IT_Assets.md](ERD_AIS_IT_Assets.md) и [ERD_AIS_IT_Assets.png](ERD_AIS_IT_Assets.png).
 
 ---
 
-## Quick Start
+## Быстрый старт
 
-### Prerequisites
+### Требования
 
-- Python 3.10 or newer
+- Python 3.10 или новее
 - pip
 
-### Installation
+### Установка
 
 ```powershell
 git clone https://github.com/Sergey051291/AIS.git
@@ -99,55 +99,55 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Run
+### Запуск
 
 ```powershell
 streamlit run app.py
 ```
 
-Open the URL shown in the terminal (default: `http://localhost:8501`).
+Откройте URL из терминала (по умолчанию: `http://localhost:8501`).
 
-On first launch the database is created automatically and populated with demo data (employees, equipment, components).
+При первом запуске база данных создается автоматически и заполняется демо-данными (сотрудники, оборудование, комплектующие).
 
 ---
 
-## Project Structure
+## Структура проекта
 
 ```
 AIS/
-├── app.py                  # Streamlit UI and business logic
-├── db.py                   # Database schema, initialization, seed data
+├── app.py                  # Интерфейс Streamlit и бизнес-логика
+├── db.py                   # Схема БД, инициализация, демо-данные
 ├── requirements.txt
-├── ERD_AIS_IT_Assets.md    # ER diagram (Mermaid)
-├── ERD_AIS_IT_Assets.png   # ER diagram (image)
+├── ERD_AIS_IT_Assets.md    # ER-диаграмма (Mermaid)
+├── ERD_AIS_IT_Assets.png   # ER-диаграмма (изображение)
 ├── docs/
-│   └── screenshots/        # UI screenshots for README
+│   └── screenshots/        # Скриншоты интерфейса для README
 └── README.md
 ```
 
 ---
 
-## Demo Data
+## Демо-данные
 
-The seed dataset includes sample records such as:
-- HP ProDesk workstation at a check-in desk
-- Lenovo ThinkPad laptop
-- Components: NVIDIA GTX 1050, Samsung SSD, Dell monitor, HP cartridge
-
----
-
-## Possible Improvements
-
-- Role-based access control
-- Integration with Service Desk / ERP systems
-- Email notifications for warranty and stock alerts
-- Migration to PostgreSQL for production deployment
-- Extended analytics (MTTR, failure recurrence, demand forecasting)
+В системе предзаполнены примеры:
+- рабочая станция HP ProDesk на стойке регистрации;
+- ноутбук Lenovo ThinkPad;
+- комплектующие: NVIDIA GTX 1050, Samsung SSD, монитор Dell, картридж HP.
 
 ---
 
-## Author
+## Возможные улучшения
 
-Developed as a production practice project (09.03.02 — Information Systems and Technologies).
+- ролевая модель доступа;
+- интеграция с Service Desk / ERP;
+- email-уведомления по гарантиям и остаткам;
+- миграция на PostgreSQL для промышленного развертывания;
+- расширенная аналитика (MTTR, повторяемость отказов, прогноз закупок).
 
-**Stack:** Python · Streamlit · SQLite · Pandas
+---
+
+## Автор
+
+Проект разработан в рамках производственной практики (09.03.02 — «Информационные системы и технологии»).
+
+**Стек:** Python · Streamlit · SQLite · Pandas
